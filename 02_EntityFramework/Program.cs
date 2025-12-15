@@ -1,5 +1,6 @@
 ﻿using _02_EntityFramework.Entities;
 using _02_EntityFramework.Methods;
+using Microsoft.EntityFrameworkCore;
 
 namespace _02_EntityFramework
 {
@@ -56,9 +57,56 @@ namespace _02_EntityFramework
             //Execute.GetOrderDetails();
 
             //Kategorilere Göre Ürün Sayısı
-            Execute.GetCategoryProductCount();
+            //Execute.GetCategoryProductCount();
+
+            //Kategorilere Göre Ortalama Fiyat
+            //Execute.GetCategoryAveragePrice();
+
+            //En Çok Sipariş Edilen Ürünler
+            //Execute.TopProductbyOrders();
+
+            //Müşteri ve Siparişleri
+            //Execute.CustomerOrders();
+
+            //Ürün Arama
+            //Execute.ProductSearch();
+
+            //Çoklu Koşul
+            //Execute.FilteredProducts();
+
+            NorthwndContext db = new NorthwndContext();
+            #region Germany ülkesindeki müşterilerin adlarını listeleyiniz
+
+            //var customers = db.Customers
+            //    .Where(c => c.Country == "Germany").ToList();
+
+            //foreach (var item in customers)
+            //{
+            //    Console.WriteLine(item.CompanyName+" "+item.Country);
+            //}
+
+            #endregion
+
+            #region Sipariş detayları ile Ürün adlarını listeleyiniz
+
+            //var orders = db.Orders
+            //    .Include(o => o.OrderDetails)
+            //    .ThenInclude(od => od.Product)
+            //    .ThenInclude(p=> p.Category)
+            //    .ToList();
 
 
+            #endregion
+
+            #region Any, All
+
+            //Birim fiyatı 100 lira büyük ürün var mı?
+            bool urunVarMi = db.Products.Any(p => p.UnitPrice > 100);
+
+
+            bool stoklarinHepsiVarmi = db.Products.All(p => p.UnitsInStock > 0);
+
+            #endregion
         }
     }
 }

@@ -124,5 +124,115 @@ namespace _02_EntityFramework.Methods
         }
 
         #endregion
+
+        #region Kategorilere Göre Ortalama Fiyat
+
+        //public static void GetCategoryAveragePrice()
+        //{
+        //    var averagePriceByCategory = db.Products
+        //        .GroupBy(p => p.Category.CategoryName)
+        //        .Select(g => new
+        //        {
+        //            CategoryName = g.Key,
+        //            AveragePrice = g.Average(p => p.UnitPrice)
+        //        })
+        //        .OrderByDescending(x => x.AveragePrice)
+        //        .ToList();
+
+        //    foreach (var item in averagePriceByCategory)
+        //    {
+        //        Console.WriteLine(item);
+        //    }
+        //}
+
+
+        #endregion
+
+        #region En Çok Sipariş Edilen Ürünler
+
+        public static void TopProductbyOrders()
+        {
+            var topProducts = db.OrderDetails
+                .GroupBy(od => od.Product.ProductName)
+                .Select(g => new
+                {
+                    ProductName = g.Key,
+                    TotalQuantity = g.Sum(od => od.Quantity),
+                    TotalRevenue = g.Sum(od => od.Quantity * od.UnitPrice)
+                })
+                .OrderByDescending(x => x.TotalQuantity)
+                .Take(10)
+                .ToList();
+
+            foreach (var item in topProducts)
+            {
+                Console.WriteLine(item);
+            }
+        }
+
+        #endregion
+
+        #region Müşteri ve Siparişleri
+
+        public static void CustomerOrders()
+        {
+            var customerOrders = db.Customers
+                .Where(c => c.Country == "Germany")
+                .Select(c => new
+                {
+                    CustomerName = c.CompanyName,
+                    OrderCount = c.Orders.Count(),
+                    TotalSpent = c.Orders
+                        .SelectMany(o => o.OrderDetails)
+                        .Sum(od => od.Quantity * od.UnitPrice)
+                })
+                .OrderByDescending(x => x.TotalSpent)
+                .ToList();
+
+            foreach (var item in customerOrders)
+            {
+                Console.WriteLine(item);
+            }
+        }
+
+        #endregion
+
+        #region Ürün Arama
+
+        public static void ProductSearch()
+        {
+            var searchResults = db.Products
+                .Where(p => p.ProductName.Contains("Chef"))
+                .ToList();
+
+            foreach (var item in searchResults)
+            {
+                Console.WriteLine(item.ProductName);
+            }
+        }
+
+        #endregion
+
+        #region Çoklu Koşul Filtreleme
+
+        public static void FilteredProducts()
+        {
+            var filteredProducts = db.Products
+                .Where(p => p.UnitPrice > 10 &&
+                           p.UnitPrice < 50 &&
+                           p.UnitsInStock > 0 &&
+                           !p.Discontinued)
+                .OrderBy(p => p.ProductName)
+                .ToList();
+
+            foreach (var item in filteredProducts)
+            {
+                Console.WriteLine(item.ProductName+" "+item.UnitPrice);
+            }
+        }
+
+        #endregion
+
+       
     }
 }
