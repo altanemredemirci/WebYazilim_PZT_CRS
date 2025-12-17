@@ -11,6 +11,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "01_AdoNet_3_ExecuteReader",
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "02_EntityFramework", "02_EntityFramework\02_EntityFramework.csproj", "{09C8D375-5147-4E68-984C-B707A9E295E7}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "03_EntityFramework_CodeFirst", "03_EntityFramework_CodeFirst\03_EntityFramework_CodeFirst.csproj", "{854F2E98-4A06-482A-BEC3-4B59D6AA0B3E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "03_EntityFramework_CodeFirst_2", "03_EntityFramework_CodeFirst_2\03_EntityFramework_CodeFirst_2.csproj", "{1EF05F2B-5658-429C-AFF4-CA1956680383}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +37,14 @@ Global
 		{09C8D375-5147-4E68-984C-B707A9E295E7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{09C8D375-5147-4E68-984C-B707A9E295E7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{09C8D375-5147-4E68-984C-B707A9E295E7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{854F2E98-4A06-482A-BEC3-4B59D6AA0B3E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{854F2E98-4A06-482A-BEC3-4B59D6AA0B3E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{854F2E98-4A06-482A-BEC3-4B59D6AA0B3E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{854F2E98-4A06-482A-BEC3-4B59D6AA0B3E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1EF05F2B-5658-429C-AFF4-CA1956680383}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1EF05F2B-5658-429C-AFF4-CA1956680383}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1EF05F2B-5658-429C-AFF4-CA1956680383}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1EF05F2B-5658-429C-AFF4-CA1956680383}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
