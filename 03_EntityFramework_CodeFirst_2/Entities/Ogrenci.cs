@@ -21,5 +21,10 @@ namespace _03_EntityFramework_CodeFirst_2.Entities
         public int TCId { get; set; }
         public TC TC { get; set; }
 
+
+        //ManyToMany
+        //Bir öğrencinin birden fazla dersi olabilir.
+        public List<Ders> Derss { get; set; }
+
     }
 }

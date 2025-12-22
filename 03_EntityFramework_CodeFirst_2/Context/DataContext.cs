@@ -22,6 +22,10 @@ namespace _03_EntityFramework_CodeFirst_2.Context
                 .HasOne(o => o.TC)
                 .WithOne(i => i.Ogrenci)
                 .HasForeignKey<TC>(i => i.OgrenciId);
+
+            modelBuilder.Entity<DersOgrenci>()
+                .HasKey(i => new {i.DersId,i.OgrenciId});
+
         }
 
 
@@ -29,5 +33,8 @@ namespace _03_EntityFramework_CodeFirst_2.Context
         public DbSet<Ogrenci> Ogrenciler { get; set; }
         public DbSet<Ogretmen> Ogretmenler { get; set; }
         public DbSet<Mudur> Mudurler { get; set; }
+        public DbSet<Ders> Dersler { get; set; }
+        public DbSet<DersOgrenci> DersOgrenciler { get; set; }
+        public DbSet<Sinif> Siniflar { get; set; }
     }
 }

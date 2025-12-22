@@ -11,8 +11,8 @@ using _03_EntityFramework_CodeFirst_2.Context;
 namespace _03_EntityFramework_CodeFirst_2.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20251217182829_UpdateDatabase2")]
-    partial class UpdateDatabase2
+    [Migration("20251222180201_CreateDatabase")]
+    partial class CreateDatabase
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -23,6 +23,53 @@ namespace _03_EntityFramework_CodeFirst_2.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
+
+            modelBuilder.Entity("DersOgrenci", b =>
+                {
+                    b.Property<int>("DerssId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("OgrencisId")
+                        .HasColumnType("int");
+
+                    b.HasKey("DerssId", "OgrencisId");
+
+                    b.HasIndex("OgrencisId");
+
+                    b.ToTable("DersOgrenci");
+                });
+
+            modelBuilder.Entity("_03_EntityFramework_CodeFirst_2.Entities.Ders", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Ad")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Dersler");
+                });
+
+            modelBuilder.Entity("_03_EntityFramework_CodeFirst_2.Entities.DersOgrenci", b =>
+                {
+                    b.Property<int>("DersId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("OgrenciId")
+                        .HasColumnType("int");
+
+                    b.HasKey("DersId", "OgrenciId");
+
+                    b.HasIndex("OgrenciId");
+
+                    b.ToTable("DersOgrenciler");
+                });
 
             modelBuilder.Entity("_03_EntityFramework_CodeFirst_2.Entities.Mudur", b =>
                 {
@@ -41,7 +88,8 @@ namespace _03_EntityFramework_CodeFirst_2.Migrations
                         .HasColumnType("float");
 
                     b.Property<string>("Soyad")
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(30)
+                        .HasColumnType("nvarchar(30)");
 
                     b.HasKey("Id");
 
@@ -65,7 +113,8 @@ namespace _03_EntityFramework_CodeFirst_2.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Soyad")
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(30)
+                        .HasColumnType("nvarchar(30)");
 
                     b.Property<int>("TCId")
                         .HasColumnType("int");
@@ -95,7 +144,8 @@ namespace _03_EntityFramework_CodeFirst_2.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Soyad")
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(30)
+                        .HasColumnType("nvarchar(30)");
 
                     b.HasKey("Id");
 
@@ -116,7 +166,7 @@ namespace _03_EntityFramework_CodeFirst_2.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Sinif");
+                    b.ToTable("Siniflar");
                 });
 
             modelBuilder.Entity("_03_EntityFramework_CodeFirst_2.Entities.TC", b =>
@@ -140,6 +190,40 @@ namespace _03_EntityFramework_CodeFirst_2.Migrations
                         .IsUnique();
 
                     b.ToTable("TC");
+                });
+
+            modelBuilder.Entity("DersOgrenci", b =>
+                {
+                    b.HasOne("_03_EntityFramework_CodeFirst_2.Entities.Ders", null)
+                        .WithMany()
+                        .HasForeignKey("DerssId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("_03_EntityFramework_CodeFirst_2.Entities.Ogrenci", null)
+                        .WithMany()
+                        .HasForeignKey("OgrencisId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("_03_EntityFramework_CodeFirst_2.Entities.DersOgrenci", b =>
+                {
+                    b.HasOne("_03_EntityFramework_CodeFirst_2.Entities.Ders", "Ders")
+                        .WithMany()
+                        .HasForeignKey("DersId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("_03_EntityFramework_CodeFirst_2.Entities.Ogrenci", "Ogrenci")
+                        .WithMany()
+                        .HasForeignKey("OgrenciId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Ders");
+
+                    b.Navigation("Ogrenci");
                 });
 
             modelBuilder.Entity("_03_EntityFramework_CodeFirst_2.Entities.Ogrenci", b =>

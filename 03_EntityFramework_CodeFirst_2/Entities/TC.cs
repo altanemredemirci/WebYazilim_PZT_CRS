@@ -14,6 +14,6 @@ namespace _03_EntityFramework_CodeFirst_2.Entities
         //OneToOne 1-1
         //Her TC bir öğrenciye aittir.
         public int OgrenciId { get; set; }
-        public Ogrenci Ogrenci { get; set; }
+        public Ogrenci Ogrenci { get; set; } //yazılan OgrenciId değerinin gerçekten kayıtlı bir Id olup olmadığı kontrol etmek.
     }
 }
